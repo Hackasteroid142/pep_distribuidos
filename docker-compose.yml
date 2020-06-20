@@ -17,8 +17,18 @@ services:
             context: ./Backend
             target: development
         image: web:dev
+        environment: 
+            - PGUSER=test
+            - PGHOST=postgres
+            - PGPASSWORD=test
+            - PGDATABASE=comisaria
+            - PGPORT=5432
+            - EXPRESSPORT=3000
+            - NODE_ICU_DATA=/code/node_modules/full-icu
         ports: 
             - '3000:3000'
         volumes:
             - ./Backend:/code
+        depends_on: 
+            - postgres
         

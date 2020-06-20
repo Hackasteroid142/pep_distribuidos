@@ -1,12 +1,15 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const routes = require('./routes');
 
-app.get('/', (req, res) => res.send('Hello World!'))
+const app = express();
 
-app.get('/:id', (req, res) => {
-    const {id} = req.params
-    res.send(id)
-})
+app.set("port", process.env.EXPRESSPORT || 3000);
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.use(express.json());
+
+routes(app);
+
+
+app.listen(process.env.EXPRESSPORT, ()=>{
+    console.log(`Listening on ${process.env.EXPRESSPORT}, and on postgres port ${process.env.PGPORT} at ${process.env.PGHOST}`)
+});
