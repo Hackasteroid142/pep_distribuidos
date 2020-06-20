@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services: 
     postgres:
@@ -12,3 +12,13 @@ services:
             - POSTGRES_DB=comisaria
         volumes: 
             - ./test_scripts_db:/docker-entrypoint-initdb.d/
+    web:
+        build:
+            context: ./Backend
+            target: development
+        image: web:dev
+        ports: 
+            - '3000:3000'
+        volumes:
+            - ./Backend:/code
+        
