@@ -31,4 +31,16 @@ services:
             - ./Backend:/code
         depends_on: 
             - postgres
+    front:
+        build:
+            context: ./frontend
+            target: development
+        image: front:dev
+        environment: 
+            - API_URL=http://localhost:3000/
+        ports:
+            - '8080:8080'
+        volumes:
+            - ./frontend:/code
+
         
