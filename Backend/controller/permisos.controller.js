@@ -5,12 +5,12 @@ const data = require("../db/permisos_data");
 
 class PermisosController{
     
-    async GetAllPermisos(req, res){
+    async GetAllPermisos(req, res, next){
         const {rows} = await permisosService.GetAllPermisos();
         res.send(rows)
     }
 
-    async GetPermisoById(req, res){
+    async GetPermisoById(req, res, next){
         const { id } = req.params
         const { rows } = await permisosService.GetPermisoById(id);
         res.send(rows[0]) 
