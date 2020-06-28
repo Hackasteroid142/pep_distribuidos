@@ -16,7 +16,7 @@ class PermisosController{
         res.send(rows[0]) 
     }
     
-    async AddPermiso(req, res){
+    async AddPermiso(req, res, next){
         const { body } = req;
         const values = [
             body.rut,
@@ -34,6 +34,8 @@ class PermisosController{
         const { row } = await permisosService.AddPermiso(values);
         res.send("Listo");
     }
+
+    
 }
 
 module.exports = new PermisosController();
