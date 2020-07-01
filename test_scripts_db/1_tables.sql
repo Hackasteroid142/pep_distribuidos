@@ -1,6 +1,6 @@
 CREATE TABLE permiso(
     user_id serial PRIMARY KEY,
-    rut CHAR(10) UNIQUE NOT NULL,
+    rut CHAR(10) NOT NULL,
     nombre CHAR(50) NOT NULL,
     edad CHAR(3) NOT NULL,
     region CHAR(50) NOT NULL,
