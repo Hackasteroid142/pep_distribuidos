@@ -1,8 +1,8 @@
 <template>
-  <v-container class="green" fluid style="height:100%"> 
-    <v-row >
+  <v-container id="fondo" fluid style="height:100%"> 
+    <v-row>
       <v-col>
-        <v-card>
+        <v-card >
           <v-form
           ref="form"
           v-model="valid"
@@ -21,7 +21,7 @@
                 <v-col >
                   <v-text-field
                   v-model="formulario.rut"
-                  label="Rut"
+                  label="Rut (No usar puntos ni guiones)"
                   required>
                   </v-text-field>
                 </v-col>
@@ -59,6 +59,7 @@
               label="Direccion"
               required>
               </v-text-field>
+
               <v-text-field
               v-model="formulario.origen"
               :rules="nameRules"
@@ -79,11 +80,11 @@
                 label="Motivo"
                 required>
               </v-select>
-              <h3>Descripción del Motivo</h3>
-              <p>{{ obtenerDescripcion(formulario.motivo) }}</p>
+              <h3 id=descripcion>Descripción del Motivo</h3>
+              <p id="descripcion">{{ obtenerDescripcion(formulario.motivo) }}</p>
               <v-row>
                 <v-col>
-                  <v-btn small @click="enviarDatos()" color="green white--text">Enviar</v-btn>
+                  <v-btn :disabled="verificar" medium @click="enviarDatos()" id="button">Enviar</v-btn>
                 </v-col>
               </v-row>
             </v-container>
@@ -91,7 +92,9 @@
         </v-card>
       </v-col>
     </v-row>
+    <Message :titulo="titulo"/>
   </v-container>
+  
 
 
  
@@ -103,9 +106,13 @@
 </template>
 
 <script>
+import Message from '@/components/Message.vue'
 import axios from 'axios';
-
   export default {
+    name: 'Permiso',
+    components: {
+    Message
+    },
     data: () => ({
       valid: true,
       formulario: {
@@ -132,12 +139,22 @@ import axios from 'axios';
         'Atacama': ['Alto del Carmen', 'Caldera', 'Chañaral', 'Copiapó', 'Diego de Almagro', 'Freirina', 'Huasco', 'Tierra Amarilla', 'Vallenar'],
         'Coquimbo': ['Andacollo', 'Canela', 'Combarbalá']
       },
-      titulo:""
+      titulo:"FALTA"
     }),
+
+    created () {
+      axios.get('http://localhost:3000/info').
+      then(res => {
+        this.motivos = res.data;
+      })
+      .catch(e => {
+        console.log(e.response);
+      });
+    },
 
     methods: {
       enviarDatos: function () {
-        axios.post('http://localhost:3000/api/permiso/',
+        axios.post('http://localhost:3000/permiso/',
         {
           rut: this.formulario.rut,
           nombre: this.formulario.nombre,
@@ -160,14 +177,35 @@ import axios from 'axios';
       }
     },
 
-    created () {
-      axios.get('http://localhost:3000/api/info').
-      then(res => {
-        this.motivos = res.data;
-      })
-      .catch(e => {
-        console.log(e.response);
-      });
+    
+
+    computed: {
+      verificar: function(){
+        if(this.formulario.rut.length === 0){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
     }
   }
 </script>
+
+<style>
+
+#button{
+  background-color: #3f8977;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#fondo{
+  background-color: #3f8977;
+}
+
+#descripcion{
+  font-family: 'Courier New', Courier, monospace;
+  color: #223a49;
+}
+</style>

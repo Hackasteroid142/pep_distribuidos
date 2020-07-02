@@ -1,21 +1,21 @@
 <template>
   <div>
     <v-app-bar
-      color="green"
+      id="titulo"
       flat
       dark
     >
 
-      <v-toolbar-title>Comisaria virtual</v-toolbar-title>
+      <v-toolbar-title to="/permiso">Comisaria virtual</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn flat text to="/permiso">
+      <v-btn dark text to="/permiso">
           Permisos
       </v-btn>
 
-      <v-btn flat text to="/">
-        Confirmación
+      <v-btn dark text to="/">
+        Inicio
       </v-btn>
 
       
@@ -33,7 +33,8 @@ export default {
 <style >
 
 #titulo{
-    color: #4CAF50;
+    background-color: #223a49;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 </style>
