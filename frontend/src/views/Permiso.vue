@@ -6,7 +6,7 @@
           <v-form
           ref="form"
           v-model="valid"
-          lazy-validation
+          validate
           >
             <v-container fluid>
               <v-row>
@@ -84,7 +84,7 @@
               <p id="descripcion">{{ obtenerDescripcion(formulario.motivo) }}</p>
               <v-row>
                 <v-col>
-                  <v-btn :disabled="verificar" medium @click="enviarDatos()" id="button">Enviar</v-btn>
+                  <v-btn medium @click="enviarDatos()" id="button">Enviar</v-btn>
                 </v-col>
               </v-row>
             </v-container>
@@ -94,15 +94,6 @@
     </v-row>
     <Message :titulo="titulo"/>
   </v-container>
-  
-
-
- 
-<!--
-
-    <p v-show="titulo === 'Listo'">LISTO</p>
-    <p v-show="titulo === 'ERROR'">ERROR</p>
-  </v-card>-->
 </template>
 
 <script>
@@ -116,14 +107,14 @@ import axios from 'axios';
     data: () => ({
       valid: true,
       formulario: {
-        rut: "",
-        nombre: "",
-        edad: "",
-        region: "",
-        comuna: "",
-        direccion: "",
-        origen: "",
-        destino: "",
+        rut: null,
+        nombre: null,
+        edad: null,
+        region: null,
+        comuna: null,
+        direccion: null,
+        origen: null,
+        destino: null,
         motivo: 0,
       },
       nameRules: [
@@ -137,9 +128,20 @@ import axios from 'axios';
         'Tarapacá': ['Alto Hospicio', 'Camiña', 'Colchane', 'Huara', 'Iquique', 'Pica', 'Pozo Almonte'],
         'Antofagasta': ['Antofagasta','Calama','Maria Elena', 'Mejillones', 'Ollagüe', 'San Pedro de Atacama', 'Sierra Gorda', 'Taltal', 'Tocopilla'],
         'Atacama': ['Alto del Carmen', 'Caldera', 'Chañaral', 'Copiapó', 'Diego de Almagro', 'Freirina', 'Huasco', 'Tierra Amarilla', 'Vallenar'],
-        'Coquimbo': ['Andacollo', 'Canela', 'Combarbalá']
+        'Coquimbo': ['Andacollo', 'Canela', 'Combarbalá','Coquimbo','Illapel','La Higuera','La Serena','Los vilos', 'Monte Patria', 'Ovalle'],
+        'Valparaíso': ['Algarrobo','Valparaiso','El tabo','Viña del mar','Quilpué'],
+        'Metropolitana': ['Santiago','Las condes','El bosque','San bernardo','Estación Central','Vitacura','La florida'],
+        'Del Libertador Bernardo O\'higgins': ['Placilla','Rancagua','Machalí','Graneros'],
+        'Del Maule':['Navidad','Cauquenes','Maule','Pencahue','Talca'],
+        'Del Biobío': ['Cabrero','Laja','Lota','Talcahuano','Nacimiento'],
+        'De la Araucanía':['Angol','Lautaro','Pucón','Toltén','Temuco'],
+        'De los Ríos': ['Corral','Los Lagos','Valdivia','Lago Ranco','Mariquina'],
+        'De los Lagos': ['Ancud','Frutillar','Puerto Montt','Río Negro','Puqueldón'],
+        'Aysén del Gral. Carlos Ibañez del Campo': ['Chile chico','Cisnes','Tortel','Guaitecas','Lago Verde'],
+        'Magallanes y de la Antártica Chilena':['Antártica','Laguna Blanca','Punta Arenas','San Gregorio','Torres del Paine'], 
+        'Ñuble': ['Coelemu','Yungay','Bulnes','Chillán Viejo','Pemuco'],
       },
-      titulo:"FALTA"
+      titulo:""
     }),
 
     created () {
@@ -167,6 +169,7 @@ import axios from 'axios';
           motivo: this.formulario.motivo
         }).then(res => {
           this.titulo = res.data;
+          this.formulario.nombre = null;
         }).catch(e => {
           this.titulo = "ERROR";
           console.log(e);
@@ -176,19 +179,6 @@ import axios from 'axios';
         return this.motivos[id].descripcion;
       }
     },
-
-    
-
-    computed: {
-      verificar: function(){
-        if(this.formulario.rut.length === 0){
-          return true;
-        }
-        else{
-          return false;
-        }
-      }
-    }
   }
 </script>
 
