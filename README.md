@@ -49,4 +49,17 @@ A continuación se listan las caracteristicas de los sistemas distribuidos y se 
 
 ## Pruebas y resultados
 
-Para la realización de pruebas se utiliza usando el software [artillery.js](https://artillery.io/). 
+Para la realización de pruebas se utiliza usando el software [artillery.js](https://artillery.io/). En este se establecen dos campos importantes, **duration** y **arrivalRate**, donde el primero define el tiempo de la prueba y el segundo cuantos usuarios virtuales se crean para consultar la API. Cabe destacar que todos los usuarios realizan una consulta POST hacia el backend. 
+
+Cada usuario virtual creado saca su informacion del archivo **data.csv** que contiene datos aleatorios de permisos. Cabe destacar que al ser aleatorios muchos datos pueden no tener sentido. 
+
+Los resultados se hicieron con la cantidad de usuarios de 20,100
+
+| Cantidad de Usuarios | 20 | 100 |250|1000|3000|5000|
+| -------------------- |:--:|:---:|:-:|:--:|:--:|:--:|
+|Escenarios lanzados|1200|6000|15000||||
+|Escenarios completados|1200|6000|15000||||
+|Respuesta por segundo|19.85|99.16|247.61||||
+|Tiempo de respuesta min (seg)|0.0036|0.0030|0.0064||||
+|Tiempo de respuesta max (seg)|0.2815|0.2279|0.3739||||
+|Tiempo de respuesta promedio (seg)|0.0106|0.010|0.0168||||
