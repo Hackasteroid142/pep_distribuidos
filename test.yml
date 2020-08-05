@@ -1,0 +1,36 @@
+config:
+    target: 'http://localhost:3000'
+    phases:
+      - duration: 60
+        arrivalRate: 100
+    payload:
+      path: "data.csv"
+      fields: 
+        - "rut"
+        - "nombre"
+        - "edad"
+        - "region"
+        - "comuna"
+        - "direccion"
+        - "motivo"
+        - "origen"
+        - "destino"
+
+scenarios:
+    - flow:
+      - post:
+          url: "/permiso/"
+          json:
+            rut: "{{ rut }}"
+            nombre: "{{ nombre }}"
+            edad: "{{ edad }}"
+            region: "{{ region }}"
+            comuna: "{{ comuna }}"
+            direccion: "{{ direccion }}"
+            motivo: "{{ motivo }}"
+            origen: "{{ origen }}"
+            destino: "{{ destino }}"
+
+
+
+  
