@@ -57,9 +57,10 @@ Los resultados se hicieron con la cantidad de usuarios de 20,100
 
 | Cantidad de Usuarios | 20 | 100 |250|1000|3000|5000|
 | -------------------- |:--:|:---:|:-:|:--:|:--:|:--:|
-|Escenarios lanzados|1200|6000|15000||||
-|Escenarios completados|1200|6000|15000||||
-|Respuesta por segundo|19.85|99.16|247.61||||
-|Tiempo de respuesta min (seg)|0.0036|0.0030|0.0064||||
-|Tiempo de respuesta max (seg)|0.2815|0.2279|0.3739||||
-|Tiempo de respuesta promedio (seg)|0.0106|0.010|0.0168||||
+|Escenarios lanzados|1200|6000|15000|60000|180180|300000|
+|Escenarios completados|1200|6000|15000|13469|22850|234740|
+|Respuesta por segundo|19.85|99.16|247.61|683.14|679.77|589.14|
+|Tiempo de respuesta min (seg)|0.0036|0.0030|0.0064|1.3808|0.2334|0.0140|
+|Tiempo de respuesta max (seg)|0.2815|0.2279|0.3739|22.6474|54.2756|8.0214|
+|Tiempo de respuesta promedio (seg)|0.0106|0.010|0.0168|20.8766|38.8858|3.5565|
+Error ||||EBUSY: 46490 EmFile: 41|EBUSY: 157116 EMFILE: 214|EBUSY: 65221 EMFILE: 39|
