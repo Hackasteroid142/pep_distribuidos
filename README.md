@@ -53,14 +53,18 @@ Para la realización de pruebas se utiliza usando el software [artillery.js](htt
 
 Cada usuario virtual creado saca su informacion del archivo **data.csv** que contiene datos aleatorios de permisos. Cabe destacar que al ser aleatorios muchos datos pueden no tener sentido. 
 
-Los resultados se hicieron con la cantidad de usuarios de 20,100
+Otra cosa a considerar es que las pruebas fueron realizadas en una maquina local.
+
+Los resultados se hicieron con la cantidad de usuarios de 20, 100, 250, 1000, 3000 y 5000. 
 
 | Cantidad de Usuarios | 20 | 100 |250|1000|3000|5000|
 | -------------------- |:--:|:---:|:-:|:--:|:--:|:--:|
 |Escenarios lanzados|1200|6000|15000|60000|180180|300000|
-|Escenarios completados|1200|6000|15000|13469|22850|234740|
-|Respuesta por segundo|19.85|99.16|247.61|683.14|679.77|589.14|
-|Tiempo de respuesta min (seg)|0.0036|0.0030|0.0064|1.3808|0.2334|0.0140|
-|Tiempo de respuesta max (seg)|0.2815|0.2279|0.3739|22.6474|54.2756|8.0214|
-|Tiempo de respuesta promedio (seg)|0.0106|0.010|0.0168|20.8766|38.8858|3.5565|
-Error ||||EBUSY: 46490 EmFile: 41|EBUSY: 157116 EMFILE: 214|EBUSY: 65221 EMFILE: 39|
+|Escenarios completados|1200|6000|15000|13469|22850|61445|
+|Respuesta por segundo|19.85|99.16|247.61|683.14|679.77|841.07|
+|Tiempo de respuesta min (seg)|0.0036|0.0030|0.0064|1.3808|0.2334|1.0133|
+|Tiempo de respuesta max (seg)|0.2815|0.2279|0.3739|22.6474|54.2756|27.5566|
+|Tiempo de respuesta promedio (seg)|0.0106|0.010|0.0168|20.8766|38.8858|17.8300|
+Error ||||EBUSY: 46490 EMFILE: 41|EBUSY: 157116 EMFILE: 214|EBUSY: 238400 EMFILE: 155|
+
+Como se puede ver en los resultados, los tiempos de respuesta comienzan a aumentar, ademas también comienza a aumentar la cantidad de casos fallidos. Todo esto se debe a que el sistema no está capacitado para recibir tantas peticiones al mismo tiempo, generando un cuello de botella y tiempo de espera mayores. Esto se puede ver ademas en los errores **EBUSY** y **EMFILE**, donde el primero indica que no se puede acceder a un archivo ya que otro lo esta ocupando y el segundo indica que se tiene abierto muchos archivos, por lo que viendo la cantidad de estos errores van aumentando mientras mas usuarios se creen. 
